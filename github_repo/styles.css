@@ -504,11 +504,15 @@ img {
 
 .image-wrapper {
     position: relative;
-    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
     overflow: hidden;
     box-shadow: var(--box-shadow);
     transform-style: preserve-3d;
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: rgba(255, 255, 255, 0.1); /* 占位背景色 */
 }
 
 .image-wrapper:hover {
@@ -528,11 +532,24 @@ img {
     z-index: -1;
     transform: translateZ(-10px);
     filter: blur(2px);
+    opacity: 0.5; /* 初始透明度 */
+    transition: opacity 0.3s;
+}
+
+.image-wrapper.loaded::before {
+    opacity: 0.7; /* 加载完成后的效果 */
+}
+
+.image-wrapper.loaded:hover::before {
+    opacity: 0.9;
 }
 
 .about-image img {
-    border-radius: 10px;
-    transition: var(--transition);
+    width: 100%;
+    border-radius: 50%;
+    transition: transform 0.5s, opacity 0.3s;
+    opacity: 0; /* 初始隐藏 */
+    will-change: transform, opacity; /* 优化渲染性能 */
 }
 
 .about-text {

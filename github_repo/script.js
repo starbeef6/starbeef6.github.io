@@ -6,6 +6,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('Website loaded');
 
+    // 预加载头像图片
+    const preloadAvatar = () => {
+        const avatar = document.querySelector('.about-image img');
+        if (avatar) {
+            // 添加加载事件以在加载完成时移除加载状态
+            avatar.onload = function() {
+                avatar.style.opacity = 1;
+                document.querySelector('.image-wrapper').classList.add('loaded');
+            };
+            
+            // 如果已经在缓存中，立即触发onload
+            if (avatar.complete) {
+                avatar.onload();
+            }
+            
+            // 添加错误处理
+            avatar.onerror = function() {
+                console.error('头像加载失败');
+                // 可以在这里设置一个默认头像
+            };
+        }
+    };
+    
+    // 调用预加载函数
+    preloadAvatar();
+
     // 添加复试资料功能
     const examResourcesLink = document.getElementById('exam-resources-link');
     const examPasswordModal = document.getElementById('exam-password-modal');
