@@ -708,7 +708,7 @@ img {
 
 /* 旧的tabs样式可以保留，但不再使用 */
 .skills-tabs {
-    display: none;
+    display: block;
 }
 
 /* 媒体查询 */
