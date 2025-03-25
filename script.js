@@ -6,39 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.loader-wrapper').classList.add('hidden');
     }, 800);
 
-    // 计算工作年限和年龄
-    const calculateYearsAndAge = () => {
-        // 工作年限计算 (从2023年至今)
-        const startYear = 2023;
-        const currentYear = new Date().getFullYear();
-        const currentMonth = new Date().getMonth() + 1; // JavaScript月份从0开始
-        
-        let workYears = currentYear - startYear;
-        
-        // 如果当前还不到一整年，显示为0+
-        if (workYears < 1) {
-            workYears = "0+";
-        }
-        
-        // 年龄固定为23
-        let age = 23;
-        
-        // 设置计数器最终值
-        const counters = document.querySelectorAll('.counter');
-        counters.forEach(counter => {
-            // 使用data-target值作为目标值，无需修改
-            const target = counter.getAttribute('data-target');
-            if (target) {
-                setTimeout(() => {
-                    counter.textContent = target;
-                }, 1500);
-            }
-        });
-    };
-
-    // 调用函数计算年龄和工作年限
-    calculateYearsAndAge();
-
     // 导航条滚动效果
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', function() {
