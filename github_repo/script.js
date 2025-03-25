@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // API URL - 本地开发用localhost，生产环境用实际域名
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+        ? 'http://localhost:3000/api' 
+        : 'https://api.yanmingxing.xyz/api'; // 生产环境API地址，需要替换为实际地址
+
     console.log('Website loaded');
 
     // 隐藏加载动画
@@ -133,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 移除所有active类
             tabItems.forEach(item => item.classList.remove('active'));
             // 隐藏所有内容
-            document.querySelectorAll('.tab-pane').forEach(content => {
+            document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
             
@@ -210,6 +215,360 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // 从服务器获取网站数据
+    async function fetchWebsiteData() {
+        try {
+            const response = await fetch(`${API_URL}/website-data`);
+            if (!response.ok) {
+                throw new Error('获取数据失败');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('获取网站数据出错:', error);
+            return null;
+        }
+    }
+
+    // 更新网站数据到服务器
+    async function updateWebsiteData(data) {
+        try {
+            const response = await fetch(`${API_URL}/website-data`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            
+            if (!response.ok) {
+                throw new Error('保存数据失败');
+            }
+            
+            return await response.json();
+        } catch (error) {
+            console.error('更新网站数据出错:', error);
+            throw error;
+        }
+    }
+
+    // 填充网站内容
+    async function populateWebsiteContent() {
+        const data = await fetchWebsiteData();
+        if (!data) {
+            console.warn('无法获取网站数据，使用默认内容');
+            return;
+        }
+
+        // 更新基本信息
+        document.querySelector('.hero-title').textContent = data.name;
+        document.querySelector('.about-text h3 .highlight').textContent = data.name;
+
+        // 更新关于我
+        const introElements = document.querySelectorAll('.about-text p');
+        if (introElements.length >= 2) {
+            introElements[0].textContent = data.intro;
+            introElements[1].textContent = data.aboutText;
+        }
+
+        // 更新技能
+        updateSkills('technical', data.technicalSkills);
+        updateSkills('soft', data.softSkills);
+
+        // 更新项目
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (projectsGrid && data.projects) {
+            projectsGrid.innerHTML = '';
+            data.projects.forEach(project => {
+                projectsGrid.appendChild(createProjectCard(project));
+            });
+        }
+
+        // 更新联系信息
+        if (data.contact) {
+            const contactElements = document.querySelectorAll('.contact-details p');
+            if (contactElements.length >= 3) {
+                contactElements[0].textContent = data.contact.email;
+                contactElements[1].textContent = data.contact.phone;
+                contactElements[2].textContent = data.contact.address;
+            }
+
+            // 更新社交媒体链接
+            updateSocialLinks(data.contact.social);
+        }
+
+        // 更新管理面板数据
+        populateAdminPanel(data);
+    }
+
+    // 更新技能部分
+    function updateSkills(skillType, skills) {
+        const skillsContainer = document.querySelector(`#${skillType} .skills-grid`);
+        if (!skillsContainer || !skills) return;
+
+        skillsContainer.innerHTML = '';
+        skills.forEach(skill => {
+            const skillItem = document.createElement('div');
+            skillItem.className = 'skill-item';
+            skillItem.innerHTML = `
+                <div class="skill-info">
+                    <h4>${skill.name}</h4>
+                    <div class="skill-percentage">${skill.level}%</div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: ${skill.level}%"></div>
+                </div>
+            `;
+            skillsContainer.appendChild(skillItem);
+        });
+    }
+
+    // 创建项目卡片
+    function createProjectCard(project) {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        
+        // 准备标签HTML
+        const tagsHtml = project.tags ? project.tags.map(tag => `<span>${tag}</span>`).join('') : '';
+        
+        card.innerHTML = `
+            <div class="project-image">
+                <img src="${project.image || 'https://via.placeholder.com/600x400'}" alt="${project.title}">
+            </div>
+            <div class="project-info">
+                <h3>${project.title}</h3>
+                <p>${project.description}</p>
+                <div class="project-tags">
+                    ${tagsHtml}
+                </div>
+                <div class="project-links">
+                    ${project.link ? `<a href="${project.link}" class="btn btn-sm" target="_blank">查看详情</a>` : ''}
+                    ${project.github ? `<a href="${project.github}" class="project-link" target="_blank"><i class="fab fa-github"></i></a>` : ''}
+                    ${project.link ? `<a href="${project.link}" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>` : ''}
+                </div>
+            </div>
+        `;
+        
+        return card;
+    }
+
+    // 更新社交媒体链接
+    function updateSocialLinks(socialLinks) {
+        const socialContainer = document.querySelector('.social-links');
+        if (!socialContainer || !socialLinks) return;
+
+        socialContainer.innerHTML = '';
+        socialLinks.forEach(link => {
+            let icon;
+            switch(link.platform) {
+                case 'github':
+                    icon = 'fab fa-github';
+                    break;
+                case 'linkedin':
+                    icon = 'fab fa-linkedin';
+                    break;
+                case 'twitter':
+                    icon = 'fab fa-twitter';
+                    break;
+                case 'instagram':
+                    icon = 'fab fa-instagram';
+                    break;
+                case 'wechat':
+                    icon = 'fab fa-weixin';
+                    break;
+                default:
+                    icon = 'fas fa-link';
+            }
+
+            const a = document.createElement('a');
+            a.href = link.platform === 'wechat' ? `javascript:alert('微信号: ${link.link}')` : link.link;
+            a.target = link.platform !== 'wechat' ? '_blank' : '';
+            a.innerHTML = `<i class="${icon}"></i>`;
+            socialContainer.appendChild(a);
+        });
+    }
+
+    // 填充管理面板数据
+    function populateAdminPanel(data) {
+        document.getElementById('admin-name').value = data.name || '';
+        document.getElementById('admin-subtitle').value = data.subtitle || '';
+        document.getElementById('admin-intro').value = data.intro || '';
+        document.getElementById('admin-about').value = data.aboutText || '';
+        document.getElementById('admin-email').value = data.contact?.email || '';
+        document.getElementById('admin-phone').value = data.contact?.phone || '';
+        document.getElementById('admin-address').value = data.contact?.address || '';
+
+        // 技术技能
+        const techSkillsContainer = document.getElementById('technical-skills-container');
+        if (techSkillsContainer) {
+            const skillEntries = techSkillsContainer.querySelectorAll('.skill-entry');
+            skillEntries.forEach(entry => {
+                if (!entry.querySelector('#add-tech-skill')) {
+                    entry.remove();
+                }
+            });
+
+            const addButton = document.getElementById('add-tech-skill');
+            if (data.technicalSkills && addButton) {
+                data.technicalSkills.forEach(skill => {
+                    const skillEntry = document.createElement('div');
+                    skillEntry.className = 'skill-entry';
+                    
+                    const uniqueId = Date.now() + Math.random().toString(36).substring(2, 9);
+                    skillEntry.innerHTML = `
+                        <input type="text" name="tech-skill-name-${uniqueId}" placeholder="技能名称" value="${skill.name}">
+                        <input type="range" name="tech-skill-level-${uniqueId}" min="0" max="100" value="${skill.level}">
+                        <span class="skill-value">${skill.level}%</span>
+                        <button type="button" class="remove-skill">移除</button>
+                    `;
+                    
+                    techSkillsContainer.insertBefore(skillEntry, addButton);
+                    
+                    // 添加事件监听器
+                    const rangeInput = skillEntry.querySelector('input[type="range"]');
+                    const valueDisplay = skillEntry.querySelector('.skill-value');
+                    
+                    rangeInput.addEventListener('input', function() {
+                        valueDisplay.textContent = this.value + '%';
+                    });
+                    
+                    const removeButton = skillEntry.querySelector('.remove-skill');
+                    removeButton.addEventListener('click', function() {
+                        techSkillsContainer.removeChild(skillEntry);
+                    });
+                });
+            }
+        }
+
+        // 软技能
+        const softSkillsContainer = document.getElementById('soft-skills-container');
+        if (softSkillsContainer) {
+            const skillEntries = softSkillsContainer.querySelectorAll('.skill-entry');
+            skillEntries.forEach(entry => {
+                if (!entry.querySelector('#add-soft-skill')) {
+                    entry.remove();
+                }
+            });
+
+            const addButton = document.getElementById('add-soft-skill');
+            if (data.softSkills && addButton) {
+                data.softSkills.forEach(skill => {
+                    const skillEntry = document.createElement('div');
+                    skillEntry.className = 'skill-entry';
+                    
+                    const uniqueId = Date.now() + Math.random().toString(36).substring(2, 9);
+                    skillEntry.innerHTML = `
+                        <input type="text" name="soft-skill-name-${uniqueId}" placeholder="技能名称" value="${skill.name}">
+                        <input type="range" name="soft-skill-level-${uniqueId}" min="0" max="100" value="${skill.level}">
+                        <span class="skill-value">${skill.level}%</span>
+                        <button type="button" class="remove-skill">移除</button>
+                    `;
+                    
+                    softSkillsContainer.insertBefore(skillEntry, addButton);
+                    
+                    // 添加事件监听器
+                    const rangeInput = skillEntry.querySelector('input[type="range"]');
+                    const valueDisplay = skillEntry.querySelector('.skill-value');
+                    
+                    rangeInput.addEventListener('input', function() {
+                        valueDisplay.textContent = this.value + '%';
+                    });
+                    
+                    const removeButton = skillEntry.querySelector('.remove-skill');
+                    removeButton.addEventListener('click', function() {
+                        softSkillsContainer.removeChild(skillEntry);
+                    });
+                });
+            }
+        }
+
+        // 项目
+        const projectsContainer = document.getElementById('projects-container');
+        if (projectsContainer) {
+            projectsContainer.innerHTML = '';
+            
+            if (data.projects) {
+                data.projects.forEach(project => {
+                    const projectEntry = document.createElement('div');
+                    projectEntry.className = 'project-entry';
+                    
+                    projectEntry.innerHTML = `
+                        <div class="form-group">
+                            <label>项目标题</label>
+                            <input type="text" name="project-title" value="${project.title || ''}">
+                        </div>
+                        <div class="form-group">
+                            <label>项目描述</label>
+                            <textarea name="project-desc">${project.description || ''}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>项目图片</label>
+                            <input type="file" name="project-image">
+                            ${project.image ? `<img src="${project.image}" alt="${project.title}" style="max-width: 100px; margin-top: 10px;">` : ''}
+                        </div>
+                        <div class="form-group">
+                            <label>技术标签 (逗号分隔)</label>
+                            <input type="text" name="project-tags" value="${project.tags ? project.tags.join(', ') : ''}">
+                        </div>
+                        <div class="form-group">
+                            <label>项目链接</label>
+                            <input type="text" name="project-link" placeholder="项目URL" value="${project.link || ''}">
+                        </div>
+                        <div class="form-group">
+                            <label>Github链接</label>
+                            <input type="text" name="project-github" placeholder="Github URL" value="${project.github || ''}">
+                        </div>
+                        <button type="button" class="remove-project btn btn-outline btn-sm">移除项目</button>
+                    `;
+                    
+                    projectsContainer.appendChild(projectEntry);
+                    
+                    const removeButton = projectEntry.querySelector('.remove-project');
+                    removeButton.addEventListener('click', function() {
+                        projectsContainer.removeChild(projectEntry);
+                    });
+                });
+            }
+        }
+
+        // 社交媒体
+        const socialContainer = document.getElementById('social-container');
+        if (socialContainer && data.contact?.social) {
+            const socialEntries = socialContainer.querySelectorAll('.social-entry');
+            socialEntries.forEach(entry => {
+                if (!entry.querySelector('#add-social')) {
+                    entry.remove();
+                }
+            });
+
+            const addButton = document.getElementById('add-social');
+            if (addButton) {
+                data.contact.social.forEach(social => {
+                    const socialEntry = document.createElement('div');
+                    socialEntry.className = 'social-entry';
+                    
+                    socialEntry.innerHTML = `
+                        <select name="social-platform">
+                            <option value="github" ${social.platform === 'github' ? 'selected' : ''}>GitHub</option>
+                            <option value="linkedin" ${social.platform === 'linkedin' ? 'selected' : ''}>LinkedIn</option>
+                            <option value="twitter" ${social.platform === 'twitter' ? 'selected' : ''}>Twitter</option>
+                            <option value="instagram" ${social.platform === 'instagram' ? 'selected' : ''}>Instagram</option>
+                            <option value="wechat" ${social.platform === 'wechat' ? 'selected' : ''}>微信</option>
+                        </select>
+                        <input type="text" name="social-link" placeholder="链接URL" value="${social.link || ''}">
+                        <button type="button" class="remove-social">移除</button>
+                    `;
+                    
+                    socialContainer.insertBefore(socialEntry, addButton);
+                    
+                    const removeButton = socialEntry.querySelector('.remove-social');
+                    removeButton.addEventListener('click', function() {
+                        socialContainer.removeChild(socialEntry);
+                    });
+                });
+            }
+        }
+    }
 
     // 管理员面板功能
     const adminLink = document.getElementById('admin-link');
@@ -431,100 +790,57 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 管理员表单提交
     if (adminForm) {
-        adminForm.addEventListener('submit', function(e) {
+        adminForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // 收集表单数据
             const formData = new FormData(adminForm);
             
-            // 更新页面内容
-            const name = formData.get('name');
-            const subtitle = formData.get('subtitle');
-            const intro = formData.get('intro');
-            const aboutText = formData.get('about-text');
-            const email = formData.get('email');
-            const phone = formData.get('phone');
-            const address = formData.get('address');
+            // 准备保存到服务器的数据对象
+            const websiteData = {
+                name: formData.get('name'),
+                subtitle: formData.get('subtitle'),
+                intro: formData.get('intro'),
+                aboutText: formData.get('about-text'),
+                technicalSkills: [],
+                softSkills: [],
+                projects: [],
+                contact: {
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    address: formData.get('address'),
+                    social: []
+                }
+            };
             
-            // 更新基本信息
-            document.querySelector('.hero-title').textContent = name;
-            document.querySelector('.hero-subtitle .highlight').nextElementSibling.textContent = subtitle;
-            
-            // 更新关于我部分
-            document.querySelector('.about-text h3 .highlight').textContent = name;
-            const aboutParagraphs = document.querySelectorAll('.about-text p');
-            if (aboutParagraphs.length >= 2) {
-                aboutParagraphs[0].textContent = intro;
-                aboutParagraphs[1].textContent = aboutText;
-            }
-            
-            // 更新联系方式
-            const contactDetails = document.querySelectorAll('.contact-text p');
-            if (contactDetails.length >= 3) {
-                contactDetails[0].textContent = email;
-                contactDetails[1].textContent = phone;
-                contactDetails[2].textContent = address;
-            }
-            
-            // 更新技能（这里简化处理，实际应用中可能需要更复杂的逻辑）
-            updateSkills('technical', formData);
-            updateSkills('soft', formData);
-            
-            // 更新项目内容（简化处理）
-            updateProjects(formData);
-            
-            // 更新社交媒体链接（简化处理）
-            updateSocialLinks(formData);
-            
-            // 关闭管理面板
-            adminPanel.style.display = 'none';
-            
-            // 显示成功消息
-            alert('网站内容已成功更新！请注意，这些更改只会在当前会话中生效，刷新页面后将恢复。');
-        });
-    }
-    
-    // 辅助函数：更新技能
-    function updateSkills(type, formData) {
-        const skillEntries = document.querySelectorAll(`#${type}-skills-container .skill-entry`);
-        const skillsContainer = document.querySelector(`#${type} .skills-grid`);
-        
-        if (skillsContainer) {
-            skillsContainer.innerHTML = '';
-            
-            skillEntries.forEach(entry => {
-                if (!entry.querySelector(`#add-${type}-skill`)) {
-                    const nameInput = entry.querySelector('input[type="text"]');
-                    const levelInput = entry.querySelector('input[type="range"]');
-                    
-                    if (nameInput && levelInput && nameInput.value.trim() !== '') {
-                        const skillItem = document.createElement('div');
-                        skillItem.className = 'skill-item';
-                        skillItem.innerHTML = `
-                            <div class="skill-info">
-                                <h4>${nameInput.value}</h4>
-                                <div class="skill-percentage">${levelInput.value}%</div>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: ${levelInput.value}%"></div>
-                            </div>
-                        `;
-                        skillsContainer.appendChild(skillItem);
-                    }
+            // 收集技术技能数据
+            document.querySelectorAll('#technical-skills-container .skill-entry').forEach(entry => {
+                const nameInput = entry.querySelector('input[type="text"]');
+                const levelInput = entry.querySelector('input[type="range"]');
+                
+                if (nameInput && levelInput && nameInput.value.trim() !== '') {
+                    websiteData.technicalSkills.push({
+                        name: nameInput.value,
+                        level: parseInt(levelInput.value)
+                    });
                 }
             });
-        }
-    }
-    
-    // 辅助函数：更新项目
-    function updateProjects(formData) {
-        const projectEntries = document.querySelectorAll('#projects-container .project-entry');
-        const projectsGrid = document.querySelector('.projects-grid');
-        
-        if (projectsGrid) {
-            projectsGrid.innerHTML = '';
             
-            projectEntries.forEach(entry => {
+            // 收集软技能数据
+            document.querySelectorAll('#soft-skills-container .skill-entry').forEach(entry => {
+                const nameInput = entry.querySelector('input[type="text"]');
+                const levelInput = entry.querySelector('input[type="range"]');
+                
+                if (nameInput && levelInput && nameInput.value.trim() !== '') {
+                    websiteData.softSkills.push({
+                        name: nameInput.value,
+                        level: parseInt(levelInput.value)
+                    });
+                }
+            });
+            
+            // 收集项目数据
+            document.querySelectorAll('#projects-container .project-entry').forEach(entry => {
                 const titleInput = entry.querySelector('input[name="project-title"]');
                 const descInput = entry.querySelector('textarea[name="project-desc"]');
                 const tagsInput = entry.querySelector('input[name="project-tags"]');
@@ -532,79 +848,46 @@ document.addEventListener('DOMContentLoaded', function() {
                 const githubInput = entry.querySelector('input[name="project-github"]');
                 
                 if (titleInput && descInput && titleInput.value.trim() !== '') {
-                    const projectCard = document.createElement('div');
-                    projectCard.className = 'project-card';
-                    
-                    const tags = tagsInput.value.split(',').map(tag => tag.trim()).filter(tag => tag);
-                    const tagsHtml = tags.map(tag => `<span>${tag}</span>`).join('');
-                    
-                    projectCard.innerHTML = `
-                        <div class="project-image">
-                            <img src="https://via.placeholder.com/600x400" alt="${titleInput.value}">
-                        </div>
-                        <div class="project-info">
-                            <h3>${titleInput.value}</h3>
-                            <p>${descInput.value}</p>
-                            <div class="project-tags">
-                                ${tagsHtml}
-                            </div>
-                            <div class="project-links">
-                                ${linkInput.value ? `<a href="${linkInput.value}" class="btn btn-sm" target="_blank">查看详情</a>` : ''}
-                                ${githubInput.value ? `<a href="${githubInput.value}" class="project-link" target="_blank"><i class="fab fa-github"></i></a>` : ''}
-                                ${linkInput.value ? `<a href="${linkInput.value}" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>` : ''}
-                            </div>
-                        </div>
-                    `;
-                    
-                    projectsGrid.appendChild(projectCard);
+                    websiteData.projects.push({
+                        title: titleInput.value,
+                        description: descInput.value,
+                        tags: tagsInput ? tagsInput.value.split(',').map(tag => tag.trim()).filter(tag => tag) : [],
+                        link: linkInput ? linkInput.value : '',
+                        github: githubInput ? githubInput.value : ''
+                    });
                 }
             });
-        }
-    }
-    
-    // 辅助函数：更新社交媒体链接
-    function updateSocialLinks(formData) {
-        const socialEntries = document.querySelectorAll('#social-container .social-entry');
-        const socialContainer = document.querySelector('.social-links');
-        
-        if (socialContainer) {
-            socialContainer.innerHTML = '';
             
-            socialEntries.forEach(entry => {
-                if (!entry.querySelector('#add-social')) {
-                    const platformSelect = entry.querySelector('select[name="social-platform"]');
-                    const linkInput = entry.querySelector('input[name="social-link"]');
-                    
-                    if (platformSelect && linkInput && linkInput.value.trim() !== '') {
-                        let icon;
-                        switch(platformSelect.value) {
-                            case 'github':
-                                icon = 'fab fa-github';
-                                break;
-                            case 'linkedin':
-                                icon = 'fab fa-linkedin';
-                                break;
-                            case 'twitter':
-                                icon = 'fab fa-twitter';
-                                break;
-                            case 'instagram':
-                                icon = 'fab fa-instagram';
-                                break;
-                            case 'wechat':
-                                icon = 'fab fa-weixin';
-                                break;
-                            default:
-                                icon = 'fas fa-link';
-                        }
-                        
-                        const a = document.createElement('a');
-                        a.href = platformSelect.value === 'wechat' ? `javascript:alert('微信号: ${linkInput.value}')` : linkInput.value;
-                        a.target = platformSelect.value !== 'wechat' ? '_blank' : '';
-                        a.innerHTML = `<i class="${icon}"></i>`;
-                        socialContainer.appendChild(a);
-                    }
+            // 收集社交媒体数据
+            document.querySelectorAll('#social-container .social-entry').forEach(entry => {
+                const platformSelect = entry.querySelector('select[name="social-platform"]');
+                const linkInput = entry.querySelector('input[name="social-link"]');
+                
+                if (platformSelect && linkInput && linkInput.value.trim() !== '') {
+                    websiteData.contact.social.push({
+                        platform: platformSelect.value,
+                        link: linkInput.value
+                    });
                 }
             });
-        }
+            
+            try {
+                // 保存数据到服务器
+                await updateWebsiteData(websiteData);
+                
+                // 更新页面内容
+                populateWebsiteContent();
+                
+                // 关闭管理面板
+                adminPanel.style.display = 'none';
+                
+                alert('网站内容已成功更新！');
+            } catch (error) {
+                alert(`保存失败: ${error.message}`);
+            }
+        });
     }
+
+    // 初始加载网站数据
+    populateWebsiteContent();
 });
