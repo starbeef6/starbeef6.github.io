@@ -1,28 +1,482 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name</title>
+    <title>严明星 - 个人网站</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h1>Your Name</h1>
-        <p>Web Developer</p>
-    </header>
-    <main>
-        <section id="about">
-            <h2>About Me</h2>
-            <p>欢迎来到我的个人网站。这里展示了我的个人简介、专业背景、兴趣爱好以及更多关于我的信息。</p>
-            <div>在这里添加您的详细介绍。
+    <!-- 加载动画 -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
 
-可以包含您的教育背景、工作经历、专业技能hhhhh等。</div>
-        </section>
-    </main>
-    <footer>
-        <p>Contact: example@example.com</p>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">YMX</div>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">首页</a></li>
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#projects">项目</a></li>
+                <li><a href="#contact">联系我</a></li>
+                <li><a href="#" id="admin-link"><i class="fas fa-lock"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 3D波浪背景 Hero区域 -->
+    <section id="home" class="hero">
+        <div class="waves-container">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">严明星</h1>
+                <div class="hero-subtitle">我是一名 <span class="typing"></span></div>
+                <p class="hero-description">专注于创造令人惊叹的数字体验</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">联系我</a>
+                    <a href="#projects" class="btn btn-outline">查看作品</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我区域 -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>关于我</h2>
+                <p>了解我的背景和经历</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="image-wrapper">
+                        <img src="avatar.jpg" alt="严明星的照片">
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>嗨，我是<span class="highlight">严明星</span></h3>
+                    <p>欢迎来到我的个人网站。这里展示了我的个人简介、专业背景、兴趣爱好以及更多关于我的信息。</p>
+                    <p>在这里添加您的详细介绍。可以包含您的教育背景、工作经历、专业技能等。</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="counter" data-target="5">0</span>
+                            <p>年工作经验</p>
+                        </div>
+                        <div class="stat">
+                            <span class="counter" data-target="20">0</span>
+                            <p>完成项目</p>
+                        </div>
+                        <div class="stat">
+                            <span class="counter" data-target="15">0</span>
+                            <p>客户合作</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能区域 -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>我的技能</h2>
+                <p>我的专业能力</p>
+            </div>
+            <div class="skills-tabs">
+                <div class="tabs-header">
+                    <div class="tab-item active" data-target="technical">技术技能</div>
+                    <div class="tab-item" data-target="soft">软技能</div>
+                </div>
+                <div class="tabs-content">
+                    <div class="tab-content active" id="technical">
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <h4>HTML/CSS</h4>
+                                    <div class="skill-percentage">90%</div>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <h4>JavaScript</h4>
+                                    <div class="skill-percentage">85%</div>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <h4>React</h4>
+                                    <div class="skill-percentage">80%</div>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <h4>Node.js</h4>
+                                    <div class="skill-percentage">75%</div>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="soft">
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <h4>沟通能力</h4>
+                                    <div class="skill-percentage">95%</div>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <h4>团队协作</h4>
+                                    <div class="skill-percentage">90%</div>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <h4>问题解决</h4>
+                                    <div class="skill-percentage">85%</div>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <h4>项目管理</h4>
+                                    <div class="skill-percentage">80%</div>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目区域 -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>我的项目</h2>
+                <p>最近的作品</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400" alt="项目1">
+                    </div>
+                    <div class="project-info">
+                        <h3>项目标题1</h3>
+                        <p>项目描述文字，简要说明项目的主要功能和特点。</p>
+                        <div class="project-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-sm">查看详情</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400" alt="项目2">
+                    </div>
+                    <div class="project-info">
+                        <h3>项目标题2</h3>
+                        <p>项目描述文字，简要说明项目的主要功能和特点。</p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-sm">查看详情</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系区域 -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>联系我</h2>
+                <p>与我取得联系</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>邮箱</h4>
+                            <p>example@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>电话</h4>
+                            <p>123-456-7890</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>地址</h4>
+                            <p>中国，北京</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="messageForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="您的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="您的邮箱" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="主题" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="您的留言" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">发送留言</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 管理员模态框 -->
+    <div id="admin-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>管理员登录</h2>
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label for="admin-password">密码</label>
+                    <input type="password" id="admin-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">登录</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 管理面板 -->
+    <div id="admin-panel" class="admin-panel">
+        <div class="admin-header">
+            <h2>网站管理面板</h2>
+            <button id="admin-close" class="btn btn-outline btn-sm">退出</button>
+        </div>
+        <div class="admin-content">
+            <div class="admin-sidebar">
+                <ul class="admin-menu">
+                    <li class="active" data-section="general">基本信息</li>
+                    <li data-section="about">关于我</li>
+                    <li data-section="skills">技能</li>
+                    <li data-section="projects">项目</li>
+                    <li data-section="contact">联系方式</li>
+                </ul>
+            </div>
+            <div class="admin-main">
+                <form id="admin-form">
+                    <!-- 基本信息 -->
+                    <div class="admin-section active" id="general-section">
+                        <h3>基本信息</h3>
+                        <div class="form-group">
+                            <label for="admin-name">姓名</label>
+                            <input type="text" id="admin-name" name="name" value="严明星">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-subtitle">职业描述</label>
+                            <input type="text" id="admin-subtitle" name="subtitle" value="Web开发者 / 设计师">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-avatar">头像</label>
+                            <input type="file" id="admin-avatar" name="avatar">
+                        </div>
+                    </div>
+                    
+                    <!-- 关于我 -->
+                    <div class="admin-section" id="about-section">
+                        <h3>关于我</h3>
+                        <div class="form-group">
+                            <label for="admin-intro">简短介绍</label>
+                            <textarea id="admin-intro" name="intro">欢迎来到我的个人网站。这里展示了我的个人简介、专业背景、兴趣爱好以及更多关于我的信息。</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-about">详细介绍</label>
+                            <textarea id="admin-about" name="about-text" rows="5">在这里添加您的详细介绍。可以包含您的教育背景、工作经历、专业技能等。</textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- 技能 -->
+                    <div class="admin-section" id="skills-section">
+                        <h3>技能</h3>
+                        <div id="technical-skills-container">
+                            <h4>技术技能</h4>
+                            <div class="skill-entry">
+                                <input type="text" name="tech-skill-name" placeholder="技能名称" value="HTML/CSS">
+                                <input type="range" name="tech-skill-level" min="0" max="100" value="90">
+                                <span class="skill-value">90%</span>
+                                <button type="button" class="remove-skill">移除</button>
+                            </div>
+                            <button type="button" id="add-tech-skill" class="btn btn-sm">添加技术技能</button>
+                        </div>
+                        <div id="soft-skills-container">
+                            <h4>软技能</h4>
+                            <div class="skill-entry">
+                                <input type="text" name="soft-skill-name" placeholder="技能名称" value="沟通能力">
+                                <input type="range" name="soft-skill-level" min="0" max="100" value="95">
+                                <span class="skill-value">95%</span>
+                                <button type="button" class="remove-skill">移除</button>
+                            </div>
+                            <button type="button" id="add-soft-skill" class="btn btn-sm">添加软技能</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 项目 -->
+                    <div class="admin-section" id="projects-section">
+                        <h3>项目</h3>
+                        <div id="projects-container">
+                            <div class="project-entry">
+                                <div class="form-group">
+                                    <label>项目标题</label>
+                                    <input type="text" name="project-title" value="项目标题1">
+                                </div>
+                                <div class="form-group">
+                                    <label>项目描述</label>
+                                    <textarea name="project-desc">项目描述文字，简要说明项目的主要功能和特点。</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>项目图片</label>
+                                    <input type="file" name="project-image">
+                                </div>
+                                <div class="form-group">
+                                    <label>技术标签 (逗号分隔)</label>
+                                    <input type="text" name="project-tags" value="HTML, CSS, JavaScript">
+                                </div>
+                                <div class="form-group">
+                                    <label>项目链接</label>
+                                    <input type="text" name="project-link" placeholder="项目URL">
+                                </div>
+                                <div class="form-group">
+                                    <label>Github链接</label>
+                                    <input type="text" name="project-github" placeholder="Github URL">
+                                </div>
+                                <button type="button" class="remove-project btn btn-outline btn-sm">移除项目</button>
+                            </div>
+                        </div>
+                        <button type="button" id="add-project" class="btn btn-sm">添加项目</button>
+                    </div>
+                    
+                    <!-- 联系方式 -->
+                    <div class="admin-section" id="contact-section">
+                        <h3>联系方式</h3>
+                        <div class="form-group">
+                            <label for="admin-email">邮箱</label>
+                            <input type="email" id="admin-email" name="email" value="example@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-phone">电话</label>
+                            <input type="text" id="admin-phone" name="phone" value="123-456-7890">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-address">地址</label>
+                            <input type="text" id="admin-address" name="address" value="中国，北京">
+                        </div>
+                        <div id="social-container">
+                            <h4>社交媒体</h4>
+                            <div class="social-entry">
+                                <select name="social-platform">
+                                    <option value="github">GitHub</option>
+                                    <option value="linkedin">LinkedIn</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="instagram">Instagram</option>
+                                </select>
+                                <input type="text" name="social-link" placeholder="链接URL">
+                                <button type="button" class="remove-social">移除</button>
+                            </div>
+                            <button type="button" id="add-social" class="btn btn-sm">添加社交媒体</button>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-footer">
+                        <button type="submit" class="btn btn-primary">保存并发布</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 回到顶部按钮 -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; <span id="current-year"></span> 严明星 | 保留所有权利</p>
+            </div>
+        </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
