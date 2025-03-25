@@ -17,9 +17,19 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 如果当前还不到一整年，显示为0+
         if (workYears < 1) {
-            document.getElementById('work-years').textContent = "0+";
-        } else {
-            document.getElementById('work-years').textContent = workYears;
+            workYears = "0+";
+        }
+        
+        // 设置工作年限data-target属性
+        const workYearsElement = document.getElementById('work-years');
+        if (workYearsElement) {
+            workYearsElement.setAttribute('data-target', typeof workYears === 'string' ? 0 : workYears);
+            if (typeof workYears === 'string') {
+                // 如果是"0+"这种格式，计数完成后再设置
+                setTimeout(() => {
+                    workYearsElement.textContent = workYears;
+                }, 1500);
+            }
         }
         
         // 年龄计算 (出生日期: 2002年2月1日)
@@ -39,14 +49,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const today = new Date();
         const hasBirthdayPassed = today > birthday && today.getMonth() !== birthday.getMonth();
         
+        let ageDisplay = age;
         if (hasBirthdayPassed) {
-            document.getElementById('age').textContent = age + "+";
-        } else {
-            document.getElementById('age').textContent = age;
+            ageDisplay = age + "+";
+        }
+        
+        // 设置年龄data-target属性
+        const ageElement = document.getElementById('age');
+        if (ageElement) {
+            ageElement.setAttribute('data-target', age);
+            if (hasBirthdayPassed) {
+                // 如果是有"+"的格式，计数完成后再添加"+"
+                setTimeout(() => {
+                    ageElement.textContent = ageDisplay;
+                }, 1500);
+            }
         }
     };
 
-    // 调用函数计算
+    // 调用函数计算年龄和工作年限
     calculateYearsAndAge();
 
     // 导航条滚动效果

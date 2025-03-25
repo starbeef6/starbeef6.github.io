@@ -588,6 +588,36 @@ img {
     margin-bottom: 10px;
 }
 
+.education {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 10px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.education:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.stat:hover .education {
+    transform: translateY(-3px);
+}
+
+.stat:hover .education:after {
+    width: 60px;
+}
+
 /* 技能部分 */
 .skills-section {
     background-color: var(--bg-light);
@@ -1409,10 +1439,12 @@ img {
     background-color: #ff5252;
 }
 
-.education {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--primary-color);
-    display: block;
-    margin-bottom: 10px;
+}
+
+.stat:hover .education {
+    transform: translateY(-3px);
+}
+
+.stat:hover .education:after {
+    width: 60px;
 }
