@@ -1408,3 +1408,11 @@ img {
 .remove-skill:hover {
     background-color: #ff5252;
 }
+
+.education {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 10px;
+}

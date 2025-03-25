@@ -6,6 +6,49 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.loader-wrapper').classList.add('hidden');
     }, 800);
 
+    // 计算工作年限和年龄
+    const calculateYearsAndAge = () => {
+        // 工作年限计算 (从2022年至今)
+        const startYear = 2022;
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth() + 1; // JavaScript月份从0开始
+        
+        let workYears = currentYear - startYear;
+        
+        // 如果当前还不到一整年，显示为0+
+        if (workYears < 1) {
+            document.getElementById('work-years').textContent = "0+";
+        } else {
+            document.getElementById('work-years').textContent = workYears;
+        }
+        
+        // 年龄计算 (出生日期: 2002年2月1日)
+        const birthYear = 2002;
+        const birthMonth = 2;
+        const birthDay = 1;
+        
+        let age = currentYear - birthYear;
+        
+        // 如果今年的生日还没到，年龄减1
+        if (currentMonth < birthMonth || (currentMonth === birthMonth && new Date().getDate() < birthDay)) {
+            age--;
+        }
+        
+        // 如果超出整岁，显示为年龄+
+        const birthday = new Date(currentYear, birthMonth - 1, birthDay);
+        const today = new Date();
+        const hasBirthdayPassed = today > birthday && today.getMonth() !== birthday.getMonth();
+        
+        if (hasBirthdayPassed) {
+            document.getElementById('age').textContent = age + "+";
+        } else {
+            document.getElementById('age').textContent = age;
+        }
+    };
+
+    // 调用函数计算
+    calculateYearsAndAge();
+
     // 导航条滚动效果
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', function() {
