@@ -939,146 +939,227 @@ img {
 .modal {
     display: none;
     position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--surface-color);
+    margin: 15% auto;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    animation: modalFadeIn 0.4s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: var(--text-color);
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--primary-color);
+}
+
+#exam-password-form {
+    margin-top: 20px;
+}
+
+#exam-password-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: var(--surface-color-alt);
+    color: var(--text-color);
+}
+
+/* 复试资料内容区域 */
+.exam-resources-section {
+    display: none;
+    position: fixed;
     z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--surface-color);
     overflow: auto;
+    animation: slideInTop 0.4s ease-out;
 }
 
-.modal-content {
-    background-color: var(--bg-color);
-    margin: 15% auto;
-    padding: 30px;
-    border-radius: 10px;
-    max-width: 400px;
-    box-shadow: var(--box-shadow);
-    position: relative;
+@keyframes slideInTop {
+    from {transform: translateY(-100%);}
+    to {transform: translateY(0);}
 }
 
-.close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover {
-    color: var(--accent-color);
-}
-
-/* 管理员面板 */
-.admin-panel {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-color);
-    z-index: 1500;
-    overflow: hidden;
-}
-
-.admin-header {
+.exam-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: var(--secondary-color);
-    color: var(--light-text);
+    background-color: var(--surface-color-alt);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.admin-content {
-    display: flex;
-    height: calc(100% - 70px);
+.exam-header h2 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.8rem;
 }
 
-.admin-sidebar {
-    width: 200px;
-    background-color: var(--gray-bg);
-    padding: 20px 0;
-    overflow-y: auto;
-}
-
-.admin-menu li {
-    padding: 12px 20px;
+.close-exam {
+    font-size: 28px;
+    color: var(--text-color);
     cursor: pointer;
-    transition: var(--transition);
+    transition: color 0.3s;
 }
 
-.admin-menu li.active,
-.admin-menu li:hover {
-    background-color: var(--primary-color);
-    color: var(--light-text);
+.close-exam:hover {
+    color: var(--primary-color);
 }
 
-.admin-main {
-    flex: 1;
+.exam-content {
     padding: 20px;
-    overflow-y: auto;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.admin-section {
+.exam-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.exam-tab {
+    padding: 12px 24px;
+    margin-right: 5px;
+    cursor: pointer;
+    color: var(--text-color);
+    border-radius: 5px 5px 0 0;
+    transition: background 0.3s;
+}
+
+.exam-tab.active, .exam-tab:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.exam-panel {
     display: none;
+    padding: 20px;
+    background-color: var(--surface-color-alt);
+    border-radius: 10px;
+    animation: fadeIn 0.3s;
 }
 
-.admin-section.active {
+.exam-panel.active {
     display: block;
 }
 
-.admin-section h3 {
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.exam-panel h3 {
+    margin-top: 0;
     margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--secondary-color);
+    color: var(--accent-color);
+    font-size: 1.5rem;
 }
 
-.skill-entry,
-.project-entry,
-.social-entry {
-    display: flex;
-    align-items: center;
+/* 可折叠内容 */
+.collapsible-item {
     margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--surface-color);
+}
+
+.collapsible-header {
     padding: 15px;
-    background-color: var(--gray-bg);
-    border-radius: 5px;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.skill-entry input[type="text"],
-.skill-entry select {
-    flex: 2;
-}
-
-.skill-entry input[type="range"] {
-    flex: 3;
-}
-
-.skill-value {
-    width: 50px;
-    text-align: center;
-}
-
-.remove-skill,
-.remove-project,
-.remove-social {
-    background-color: var(--accent-color);
-    color: var(--light-text);
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
+    font-weight: 600;
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: background 0.3s;
 }
 
-.admin-footer {
-    margin-top: 30px;
-    text-align: right;
+.collapsible-header:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.collapsible-content {
+    display: none;
+    padding: 15px;
+    animation: slideDown 0.3s;
+}
+
+@keyframes slideDown {
+    from {opacity: 0; max-height: 0;}
+    to {opacity: 1; max-height: 500px;}
+}
+
+/* 术语项 */
+.term-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.term-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.term-definition {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .exam-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .exam-tab {
+        flex-basis: calc(50% - 10px);
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    
+    .modal-content {
+        margin: 20% auto;
+        width: 95%;
+        padding: 1.5rem;
+    }
 }
 
 /* 回到顶部按钮 */

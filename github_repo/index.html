@@ -29,6 +29,7 @@
                 <li><a href="#projects">项目</a></li>
                 <li><a href="#contact">联系我</a></li>
                 <li><a href="#" id="admin-link"><i class="fas fa-lock"></i></a></li>
+                <li><a href="#" id="exam-resources-link"><i class="fas fa-star"></i></a></li>
             </ul>
         </div>
     </nav>
@@ -470,6 +471,88 @@
                         <button type="submit" class="btn btn-primary">保存并发布</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 复试资料密码弹窗 -->
+    <div id="exam-password-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>访问复试资料</h2>
+            <p>请输入密码查看复试资料内容</p>
+            <form id="exam-password-form">
+                <input type="password" id="exam-password" placeholder="请输入密码" required>
+                <button type="submit" class="btn btn-primary">确认</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 复试资料内容区域 -->
+    <div id="exam-resources" class="exam-resources-section">
+        <div class="container">
+            <div class="exam-header">
+                <h2>电子科技大学MBA复试资料汇总</h2>
+                <span class="close-exam">&times;</span>
+            </div>
+            <div class="exam-content">
+                <div class="exam-tabs">
+                    <div class="exam-tab active" data-tab="overview">复试概述</div>
+                    <div class="exam-tab" data-tab="templates">面试模板</div>
+                    <div class="exam-tab" data-tab="politics">政治考点</div>
+                    <div class="exam-tab" data-tab="questions">历年真题</div>
+                </div>
+                <div class="exam-tab-content">
+                    <!-- 复试概述 -->
+                    <div class="exam-panel active" id="overview-panel">
+                        <h3>复试概述</h3>
+                        <p>电子科技大学MBA复试主要包括三个部分：政治理论笔试、英语口语与听力测试，以及综合测试（包括小组面试）。总分300分，占录取总成绩的50%。</p>
+                        <p>计算公式：总成绩 = (初试成绩/3)×50% + (复试成绩/3)×50%</p>
+                        <p>复试合格线：非国家专项计划考生总分及单项成绩均达到60%，国家专项计划考生总分达到60%即可。</p>
+                    </div>
+                    
+                    <!-- 面试模板 -->
+                    <div class="exam-panel" id="templates-panel">
+                        <h3>面试万能模板</h3>
+                        <div class="collapsible-item">
+                            <div class="collapsible-header">综合面试万能模板（中文，以AI为核心）<span class="toggle-icon">▼</span></div>
+                            <div class="collapsible-content">
+                                <p>综合面试通常考察您的管理思维、行业洞察和逻辑表达能力。该模板结合AI视角，确保回答有深度且与问题相关。</p>
+                                <h4>模板结构</h4>
+                                <ul>
+                                    <li><strong>AI视角切入</strong>：用AI相关概念直接回应问题，展现您的专业性</li>
+                                    <li><strong>具体例子或逻辑支持</strong>：结合AI应用案例或您的理解，支撑观点</li>
+                                    <li><strong>联系问题并总结</strong>：将AI与问题核心联系起来，给出结论</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 政治考点 -->
+                    <div class="exam-panel" id="politics-panel">
+                        <h3>政治考点</h3>
+                        <div class="collapsible-item">
+                            <div class="collapsible-header">经济学类名词<span class="toggle-icon">▼</span></div>
+                            <div class="collapsible-content">
+                                <div class="term-item">
+                                    <div class="term-name">供给侧结构性改革</div>
+                                    <div class="term-definition">从提高供给质量出发，通过调整经济结构、转变增长方式、化解过剩产能，实现更高质量、更有效率、更可持续的发展。</div>
+                                </div>
+                                <div class="term-item">
+                                    <div class="term-name">新发展格局</div>
+                                    <div class="term-definition">以国内大循环为主体、国内国际双循环相互促进的经济发展模式，强调扩大内需和自主创新。</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 历年真题 -->
+                    <div class="exam-panel" id="questions-panel">
+                        <h3>历年真题</h3>
+                        <p>此部分包含历年MBA复试真题汇总和分析。</p>
+                        <p>资料持续更新中...</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

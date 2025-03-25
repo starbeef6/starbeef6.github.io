@@ -6,6 +6,105 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('Website loaded');
 
+    // 添加复试资料功能
+    const examResourcesLink = document.getElementById('exam-resources-link');
+    const examPasswordModal = document.getElementById('exam-password-modal');
+    const examResources = document.getElementById('exam-resources');
+    const examPasswordForm = document.getElementById('exam-password-form');
+    const closeExamModal = document.querySelector('.close-modal');
+    const closeExam = document.querySelector('.close-exam');
+    
+    // 正确的密码
+    const correctPassword = 'uestc2024';
+    
+    // 点击星星图标显示密码框
+    if (examResourcesLink) {
+        examResourcesLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            examPasswordModal.style.display = 'block';
+        });
+    }
+    
+    // 关闭密码框
+    if (closeExamModal) {
+        closeExamModal.addEventListener('click', function() {
+            examPasswordModal.style.display = 'none';
+        });
+    }
+    
+    // 关闭复试资料
+    if (closeExam) {
+        closeExam.addEventListener('click', function() {
+            examResources.style.display = 'none';
+        });
+    }
+    
+    // 验证密码
+    if (examPasswordForm) {
+        examPasswordForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('exam-password').value;
+            
+            if (password === correctPassword) {
+                // 密码正确，显示复试资料
+                examPasswordModal.style.display = 'none';
+                examResources.style.display = 'block';
+                document.getElementById('exam-password').value = ''; // 清空密码框
+            } else {
+                // 密码错误，显示提示
+                alert('密码错误，请重试');
+            }
+        });
+    }
+    
+    // 切换复试资料标签页
+    const examTabs = document.querySelectorAll('.exam-tab');
+    if (examTabs.length > 0) {
+        examTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 移除所有tab的active类
+                examTabs.forEach(t => t.classList.remove('active'));
+                // 添加active类到当前点击的tab
+                this.classList.add('active');
+                
+                // 隐藏所有面板
+                document.querySelectorAll('.exam-panel').forEach(panel => {
+                    panel.classList.remove('active');
+                });
+                
+                // 显示对应面板
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId + '-panel').classList.add('active');
+            });
+        });
+    }
+    
+    // 可折叠内容功能
+    const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+    if (collapsibleHeaders.length > 0) {
+        collapsibleHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const toggleIcon = this.querySelector('.toggle-icon');
+                
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                    if (toggleIcon) toggleIcon.textContent = '▼';
+                } else {
+                    content.style.display = 'block';
+                    if (toggleIcon) toggleIcon.textContent = '▲';
+                }
+            });
+        });
+    }
+    
+    // 点击页面其他地方关闭模态框
+    window.addEventListener('click', function(e) {
+        if (e.target === examPasswordModal) {
+            examPasswordModal.style.display = 'none';
+        }
+    });
+
     // 隐藏加载动画
     setTimeout(function() {
         document.querySelector('.loader-wrapper').classList.add('hidden');
