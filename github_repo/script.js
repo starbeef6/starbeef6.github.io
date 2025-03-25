@@ -12,10 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const examResources = document.getElementById('exam-resources');
     const examPasswordForm = document.getElementById('exam-password-form');
     const closeExamModal = document.querySelector('.close-modal');
-    const closeExam = document.querySelector('.close-exam');
     
     // 正确的密码
     const correctPassword = 'uestc2024';
+    
+    // 标记是否已加载复试资料内容
+    let examContentLoaded = false;
     
     // 点击星星图标显示密码框
     if (examResourcesLink) {
@@ -32,13 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 关闭复试资料
-    if (closeExam) {
-        closeExam.addEventListener('click', function() {
-            examResources.style.display = 'none';
-        });
-    }
-    
     // 验证密码
     if (examPasswordForm) {
         examPasswordForm.addEventListener('submit', function(e) {
@@ -46,7 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('exam-password').value;
             
             if (password === correctPassword) {
-                // 密码正确，显示复试资料
+                // 密码正确，加载复试资料内容（如果还没加载）
+                if (!examContentLoaded) {
+                    loadExamContent();
+                    examContentLoaded = true;
+                }
+                
+                // 显示复试资料
                 examPasswordModal.style.display = 'none';
                 examResources.style.display = 'block';
                 document.getElementById('exam-password').value = ''; // 清空密码框
@@ -57,45 +58,128 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 切换复试资料标签页
-    const examTabs = document.querySelectorAll('.exam-tab');
-    if (examTabs.length > 0) {
-        examTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                // 移除所有tab的active类
-                examTabs.forEach(t => t.classList.remove('active'));
-                // 添加active类到当前点击的tab
-                this.classList.add('active');
-                
-                // 隐藏所有面板
-                document.querySelectorAll('.exam-panel').forEach(panel => {
-                    panel.classList.remove('active');
+    // 动态加载复试资料内容
+    function loadExamContent() {
+        // 创建内容HTML
+        const examHtml = `
+            <div class="container">
+                <div class="exam-header">
+                    <h2>电子科技大学MBA复试资料汇总</h2>
+                    <span class="close-exam">&times;</span>
+                </div>
+                <div class="exam-content">
+                    <div class="exam-tabs">
+                        <div class="exam-tab active" data-tab="overview">复试概述</div>
+                        <div class="exam-tab" data-tab="templates">面试模板</div>
+                        <div class="exam-tab" data-tab="politics">政治考点</div>
+                        <div class="exam-tab" data-tab="questions">历年真题</div>
+                    </div>
+                    <div class="exam-tab-content">
+                        <!-- 复试概述 -->
+                        <div class="exam-panel active" id="overview-panel">
+                            <h3>复试概述</h3>
+                            <p>电子科技大学MBA复试主要包括三个部分：政治理论笔试、英语口语与听力测试，以及综合测试（包括小组面试）。总分300分，占录取总成绩的50%。</p>
+                            <p>计算公式：总成绩 = (初试成绩/3)×50% + (复试成绩/3)×50%</p>
+                            <p>复试合格线：非国家专项计划考生总分及单项成绩均达到60%，国家专项计划考生总分达到60%即可。</p>
+                        </div>
+                        
+                        <!-- 面试模板 -->
+                        <div class="exam-panel" id="templates-panel">
+                            <h3>面试万能模板</h3>
+                            <div class="collapsible-item">
+                                <div class="collapsible-header">综合面试万能模板（中文，以AI为核心）<span class="toggle-icon">▼</span></div>
+                                <div class="collapsible-content">
+                                    <p>综合面试通常考察您的管理思维、行业洞察和逻辑表达能力。该模板结合AI视角，确保回答有深度且与问题相关。</p>
+                                    <h4>模板结构</h4>
+                                    <ul>
+                                        <li><strong>AI视角切入</strong>：用AI相关概念直接回应问题，展现您的专业性</li>
+                                        <li><strong>具体例子或逻辑支持</strong>：结合AI应用案例或您的理解，支撑观点</li>
+                                        <li><strong>联系问题并总结</strong>：将AI与问题核心联系起来，给出结论</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 政治考点 -->
+                        <div class="exam-panel" id="politics-panel">
+                            <h3>政治考点</h3>
+                            <div class="collapsible-item">
+                                <div class="collapsible-header">经济学类名词<span class="toggle-icon">▼</span></div>
+                                <div class="collapsible-content">
+                                    <div class="term-item">
+                                        <div class="term-name">供给侧结构性改革</div>
+                                        <div class="term-definition">从提高供给质量出发，通过调整经济结构、转变增长方式、化解过剩产能，实现更高质量、更有效率、更可持续的发展。</div>
+                                    </div>
+                                    <div class="term-item">
+                                        <div class="term-name">新发展格局</div>
+                                        <div class="term-definition">以国内大循环为主体、国内国际双循环相互促进的经济发展模式，强调扩大内需和自主创新。</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 历年真题 -->
+                        <div class="exam-panel" id="questions-panel">
+                            <h3>历年真题</h3>
+                            <p>此部分包含历年MBA复试真题汇总和分析。</p>
+                            <p>资料持续更新中...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // 添加内容到DOM
+        examResources.innerHTML = examHtml;
+        
+        // 添加事件监听器
+        const closeExam = document.querySelector('.close-exam');
+        if (closeExam) {
+            closeExam.addEventListener('click', function() {
+                examResources.style.display = 'none';
+            });
+        }
+        
+        // 切换复试资料标签页
+        const examTabs = document.querySelectorAll('.exam-tab');
+        if (examTabs.length > 0) {
+            examTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 移除所有tab的active类
+                    examTabs.forEach(t => t.classList.remove('active'));
+                    // 添加active类到当前点击的tab
+                    this.classList.add('active');
+                    
+                    // 隐藏所有面板
+                    document.querySelectorAll('.exam-panel').forEach(panel => {
+                        panel.classList.remove('active');
+                    });
+                    
+                    // 显示对应面板
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId + '-panel').classList.add('active');
                 });
-                
-                // 显示对应面板
-                const tabId = this.getAttribute('data-tab');
-                document.getElementById(tabId + '-panel').classList.add('active');
             });
-        });
-    }
-    
-    // 可折叠内容功能
-    const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
-    if (collapsibleHeaders.length > 0) {
-        collapsibleHeaders.forEach(header => {
-            header.addEventListener('click', function() {
-                const content = this.nextElementSibling;
-                const toggleIcon = this.querySelector('.toggle-icon');
-                
-                if (content.style.display === 'block') {
-                    content.style.display = 'none';
-                    if (toggleIcon) toggleIcon.textContent = '▼';
-                } else {
-                    content.style.display = 'block';
-                    if (toggleIcon) toggleIcon.textContent = '▲';
-                }
+        }
+        
+        // 可折叠内容功能
+        const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+        if (collapsibleHeaders.length > 0) {
+            collapsibleHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const toggleIcon = this.querySelector('.toggle-icon');
+                    
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                        if (toggleIcon) toggleIcon.textContent = '▼';
+                    } else {
+                        content.style.display = 'block';
+                        if (toggleIcon) toggleIcon.textContent = '▲';
+                    }
+                });
             });
-        });
+        }
     }
     
     // 点击页面其他地方关闭模态框

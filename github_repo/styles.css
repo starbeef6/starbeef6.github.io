@@ -957,12 +957,7 @@ img {
     max-width: 500px;
     border-radius: 15px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    animation: modalFadeIn 0.4s ease-out;
-}
-
-@keyframes modalFadeIn {
-    from {opacity: 0; transform: translateY(-20px);}
-    to {opacity: 1; transform: translateY(0);}
+    transition: transform 0.3s ease;
 }
 
 .close-modal {
@@ -1005,12 +1000,7 @@ img {
     height: 100%;
     background-color: var(--surface-color);
     overflow: auto;
-    animation: slideInTop 0.4s ease-out;
-}
-
-@keyframes slideInTop {
-    from {transform: translateY(-100%);}
-    to {transform: translateY(0);}
+    transition: transform 0.4s ease;
 }
 
 .exam-header {
@@ -1049,11 +1039,13 @@ img {
     display: flex;
     margin-bottom: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
 }
 
 .exam-tab {
     padding: 12px 24px;
     margin-right: 5px;
+    margin-bottom: 5px;
     cursor: pointer;
     color: var(--text-color);
     border-radius: 5px 5px 0 0;
@@ -1070,16 +1062,11 @@ img {
     padding: 20px;
     background-color: var(--surface-color-alt);
     border-radius: 10px;
-    animation: fadeIn 0.3s;
+    transition: opacity 0.3s;
 }
 
 .exam-panel.active {
     display: block;
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
 }
 
 .exam-panel h3 {
@@ -1116,12 +1103,7 @@ img {
 .collapsible-content {
     display: none;
     padding: 15px;
-    animation: slideDown 0.3s;
-}
-
-@keyframes slideDown {
-    from {opacity: 0; max-height: 0;}
-    to {opacity: 1; max-height: 500px;}
+    transition: opacity 0.3s;
 }
 
 /* 术语项 */
@@ -1145,16 +1127,6 @@ img {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .exam-tabs {
-        flex-wrap: wrap;
-    }
-    
-    .exam-tab {
-        flex-basis: calc(50% - 10px);
-        text-align: center;
-        margin-bottom: 5px;
-    }
-    
     .modal-content {
         margin: 20% auto;
         width: 95%;
