@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 计算工作年限和年龄
     const calculateYearsAndAge = () => {
-        // 工作年限计算 (从2022年至今)
-        const startYear = 2022;
+        // 工作年限计算 (从2023年至今)
+        const startYear = 2023;
         const currentYear = new Date().getFullYear();
         const currentMonth = new Date().getMonth() + 1; // JavaScript月份从0开始
         
@@ -20,51 +20,20 @@ document.addEventListener('DOMContentLoaded', function() {
             workYears = "0+";
         }
         
-        // 设置工作年限data-target属性
-        const workYearsElement = document.getElementById('work-years');
-        if (workYearsElement) {
-            workYearsElement.setAttribute('data-target', typeof workYears === 'string' ? 0 : workYears);
-            if (typeof workYears === 'string') {
-                // 如果是"0+"这种格式，计数完成后再设置
+        // 年龄固定为23
+        let age = 23;
+        
+        // 设置计数器最终值
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            // 使用data-target值作为目标值，无需修改
+            const target = counter.getAttribute('data-target');
+            if (target) {
                 setTimeout(() => {
-                    workYearsElement.textContent = workYears;
+                    counter.textContent = target;
                 }, 1500);
             }
-        }
-        
-        // 年龄计算 (出生日期: 2002年2月1日)
-        const birthYear = 2002;
-        const birthMonth = 2;
-        const birthDay = 1;
-        
-        let age = currentYear - birthYear;
-        
-        // 如果今年的生日还没到，年龄减1
-        if (currentMonth < birthMonth || (currentMonth === birthMonth && new Date().getDate() < birthDay)) {
-            age--;
-        }
-        
-        // 如果超出整岁，显示为年龄+
-        const birthday = new Date(currentYear, birthMonth - 1, birthDay);
-        const today = new Date();
-        const hasBirthdayPassed = today > birthday && today.getMonth() !== birthday.getMonth();
-        
-        let ageDisplay = age;
-        if (hasBirthdayPassed) {
-            ageDisplay = age + "+";
-        }
-        
-        // 设置年龄data-target属性
-        const ageElement = document.getElementById('age');
-        if (ageElement) {
-            ageElement.setAttribute('data-target', age);
-            if (hasBirthdayPassed) {
-                // 如果是有"+"的格式，计数完成后再添加"+"
-                setTimeout(() => {
-                    ageElement.textContent = ageDisplay;
-                }, 1500);
-            }
-        }
+        });
     };
 
     // 调用函数计算年龄和工作年限
