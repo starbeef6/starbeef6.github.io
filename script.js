@@ -1,23 +1,20 @@
-// Apple-style Scroll Reveal Animation
+// Apple-style Smooth Scroll Reveal
 document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -80px 0px'
+        rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // Stagger animation for smooth appearance
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, index * 100);
+                entry.target.classList.add('active');
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe all cards with scroll-reveal class
+    // Observe all scroll-reveal elements
     document.querySelectorAll('.scroll-reveal').forEach((el) => {
         observer.observe(el);
     });
@@ -36,4 +33,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-

@@ -8,266 +8,245 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header Section -->
-        <header class="header">
-            <h1 class="name">闫明星</h1>
-            <div class="subtitle">AI 产品经理 / 策略运营 / 商业分析</div>
-            <div class="meta-info">
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1 class="hero-name">闫明星</h1>
+            <p class="hero-subtitle">AI 产品经理 / 策略运营 / 商业分析</p>
+            <div class="hero-meta">
                 <span>23岁</span>
-                <span>·</span>
+                <span class="separator">·</span>
                 <span>电子科技大学 · 硕士在读</span>
-                <span>·</span>
+                <span class="separator">·</span>
                 <span>(+86) 173-0747-8546</span>
-                <span>·</span>
-                <span><a href="mailto:starbeefen@gmail.com">starbeefen@gmail.com</a></span>
+                <span class="separator">·</span>
+                <a href="mailto:starbeefen@gmail.com">starbeefen@gmail.com</a>
             </div>
-            <div class="status-badge">
-                <span class="status-dot"></span>
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
                 <span>一周内到岗 · 研一已结课，可全勤实习 6 个月</span>
             </div>
         </header>
 
-        <!-- Bento Grid Layout -->
-        <div class="grid">
-            <!-- 职业总结 - Full Width -->
-            <div class="card card-full scroll-reveal">
-                <div class="card-header">
-                    <h2>职业总结</h2>
-                    <span class="card-subtitle">Professional Summary</span>
-                </div>
-                <div class="card-content">
-                    <div class="summary-item">
-                        <div class="summary-icon">🎯</div>
-                        <div class="summary-text">
-                            <strong>复合背景：</strong> 具备"金融数学 + 工商管理"复合背景，拥有 2.5 年互联网业务运营与策略产品实战经验。
+        <!-- Content Sections -->
+        <main class="content">
+            <!-- 职业总结 -->
+            <section class="section scroll-reveal">
+                <h2 class="section-title">职业总结</h2>
+                <p class="section-subtitle">Professional Summary</p>
+                <div class="card card-large">
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <div class="summary-number">2.5年</div>
+                            <div class="summary-label">实战经验</div>
+                            <p class="summary-text">具备"金融数学 + 工商管理"复合背景，拥有丰富的互联网业务运营与策略产品实战经验。</p>
                         </div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-icon">⚡</div>
-                        <div class="summary-text">
-                            <strong>AI 驱动：</strong> AI 原生代产品人。拒绝低效手工，精通 Prompt Engineering，擅长利用 LLM 工具链（Cursor/GPT-4）搭建自动化工作流，单人产出效率匹敌 <strong class="highlight">3 人小组</strong>。
+                        <div class="summary-item">
+                            <div class="summary-number">3x</div>
+                            <div class="summary-label">效率提升</div>
+                            <p class="summary-text">AI 原生代产品人。精通 Prompt Engineering，擅长利用 LLM 工具链搭建自动化工作流，单人产出效率匹敌 3 人小组。</p>
                         </div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-icon">🧠</div>
-                        <div class="summary-text">
-                            <strong>核心能力：</strong> 擅长从 0 到 1 定义业务规则，精通用户漏斗分析、风险定价策略及 A/B Test 实验设计，对数据异动具备极强的商业直觉。
+                        <div class="summary-item">
+                            <div class="summary-number">0→1</div>
+                            <div class="summary-label">从零到一</div>
+                            <p class="summary-text">擅长定义业务规则，精通用户漏斗分析、风险定价策略及 A/B Test 实验设计，对数据异动具备极强的商业直觉。</p>
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <!-- 工作经历 -->
+            <section class="section scroll-reveal">
+                <h2 class="section-title">工作经历</h2>
+                <p class="section-subtitle">Work Experience</p>
+                
+                <div class="card">
+                    <div class="job-header">
+                        <div class="job-title-group">
+                            <h3 class="job-company">河南大学量化金融实验室</h3>
+                            <p class="job-role">策略产品负责人</p>
+                        </div>
+                        <time class="job-period">2024.04 – 2025.09</time>
+                    </div>
+                    <ul class="job-list">
+                        <li>
+                            <span class="list-mark"></span>
+                            <div class="list-content">
+                                <strong>自动化系统设计：</strong> 针对日均 <span class="highlight">10 万级</span>高频金融数据，主导设计了一套自动化异常信号监测系统。定义了 12 个核心风险因子逻辑，利用 AI 辅助搭建自动化 ETL 管道，将原始数据处理效率提升 <span class="highlight">500%</span>。
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-mark"></span>
+                            <div class="list-content">
+                                <strong>策略风控迭代：</strong> 负责交易系统的风控策略设计。在 2024 年极端行情下，通过动态仓位管理模型，将系统最大回撤控制在 <span class="highlight">5%</span> 以内，验证了策略在极端环境下的鲁棒性。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="job-header">
+                        <div class="job-title-group">
+                            <h3 class="job-company">维音信息技术 (Visionet)</h3>
+                            <p class="job-role">用户运营专员 (策略方向)</p>
+                        </div>
+                        <time class="job-period">2023.03 – 2024.03</time>
+                    </div>
+                    <ul class="job-list">
+                        <li>
+                            <span class="list-mark"></span>
+                            <div class="list-content">
+                                <strong>营收增长策略 (Upsell)：</strong> 负责酒店业务板块的存量用户价值挖掘。基于用户历史订单与行为标签（RFM模型），制定差异化的升单策略。通过优化触达话术与推荐逻辑，实现单客 <span class="highlight">ARPU（每用户平均收入）提升 15%</span>。
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-mark"></span>
+                            <div class="list-content">
+                                <strong>履约体验保障 (SLA)：</strong> 监控供应商履约质量，建立风险预警机制。通过数据归因定位服务断点，协调资源进行整改，将核心业务的履约纠纷率降低 <span class="highlight">10%</span>。
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-mark"></span>
+                            <div class="list-content">
+                                <strong>数据产品化：</strong> 利用 Excel 搭建每日运营监控看板，涵盖流量、转化、客诉等核心维度，实现了业务指标的 T+0 可视化管理。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 项目经历 -->
+            <section class="section scroll-reveal">
+                <h2 class="section-title">项目经历</h2>
+                <p class="section-subtitle">Key Projects</p>
+                
+                <div class="card">
+                    <div class="job-header">
+                        <div class="job-title-group">
+                            <h3 class="job-company">跨境金融业务 · 反欺诈策略产品化</h3>
+                            <p class="job-role">项目负责人</p>
+                        </div>
+                        <time class="job-period">2023.03 – 2023.06</time>
+                    </div>
+                    <ul class="job-list">
+                        <li>
+                            <span class="list-mark"></span>
+                            <div class="list-content">
+                                <strong>问题定义：</strong> 针对营销活动中 30% 的预算损耗问题，通过数据挖掘定位到黑产"薅羊毛"团伙的攻击路径。
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-mark"></span>
+                            <div class="list-content">
+                                <strong>策略落地：</strong> 独立定义了"设备指纹聚集度"等 5 个高风险特征维度，并设计了分层拦截产品方案（高风险熔断，中风险验证）。
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-mark"></span>
+                            <div class="list-content">
+                                <strong>项目成果：</strong> 方案上线后，成功拦截 80% 以上的异常账户，为业务挽回约 <span class="highlight">30% 的营销预算</span>。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="job-header">
+                        <div class="job-title-group">
+                            <h3 class="job-company">电商经营分析 · 自动化数据产品化</h3>
+                            <p class="job-role">数据产品经理</p>
+                        </div>
+                        <time class="job-period">2024.02 – 2024.05</time>
+                    </div>
+                    <ul class="job-list">
+                        <li>
+                            <span class="list-mark"></span>
+                            <div class="list-content">
+                                <strong>需求拆解：</strong> 深度调研业务痛点，梳理并定义了 GMV、复购率、转化漏斗等 20+ 个核心经营指标的底层计算口径。
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-mark"></span>
+                            <div class="list-content">
+                                <strong>工具提效：</strong> 利用 AI 代码生成技术快速搭建自动化监控看板，实现了数据从"被动提取"到"主动推送"的转变，降低了运营团队 <span class="highlight">90% 的重复性统计工作</span>。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 教育背景和技能 -->
+            <div class="two-column">
+                <section class="section scroll-reveal">
+                    <h2 class="section-title">教育背景</h2>
+                    <p class="section-subtitle">Education</p>
+                    <div class="card">
+                        <div class="education-item">
+                            <div class="education-icon">🎓</div>
+                            <div class="education-content">
+                                <h4 class="education-school">电子科技大学</h4>
+                                <p class="education-degree">工商管理 (数据策略方向)</p>
+                                <p class="education-level">硕士研究生</p>
+                                <p class="education-period">2025.09 - 2027.06</p>
+                            </div>
+                        </div>
+                        <div class="divider-inline"></div>
+                        <div class="education-item">
+                            <div class="education-icon">📚</div>
+                            <div class="education-content">
+                                <h4 class="education-school">河南大学</h4>
+                                <p class="education-degree">金融数学与金融工程</p>
+                                <p class="education-level">本科</p>
+                                <p class="education-period">2018.09 - 2022.06</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section scroll-reveal">
+                    <h2 class="section-title">技能与特质</h2>
+                    <p class="section-subtitle">Skills & Expertise</p>
+                    <div class="card">
+                        <div class="skills-group">
+                            <div class="skill-category">
+                                <p class="skill-label">产品/运营</p>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">需求分析</span>
+                                    <span class="skill-tag">PRD 撰写</span>
+                                    <span class="skill-tag">A/B Test</span>
+                                    <span class="skill-tag">用户路径</span>
+                                    <span class="skill-tag">SOP 制定</span>
+                                    <span class="skill-tag">风险策略</span>
+                                </div>
+                            </div>
+                            <div class="skill-category">
+                                <p class="skill-label">数据与 AI</p>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Prompt Engineering</span>
+                                    <span class="skill-tag">LLM 工具链</span>
+                                    <span class="skill-tag">数据架构</span>
+                                </div>
+                            </div>
+                            <div class="skill-category">
+                                <p class="skill-label">工具栈</p>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">SQL</span>
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">Excel</span>
+                                    <span class="skill-tag">Tableau</span>
+                                    <span class="skill-tag">Visio</span>
+                                </div>
+                            </div>
+                            <div class="skill-category">
+                                <p class="skill-label">语言</p>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">英语 CET-6</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-
-            <!-- 工作经历 - Full Width -->
-            <div class="card card-full scroll-reveal">
-                <div class="card-header">
-                    <h2>工作经历</h2>
-                    <span class="card-subtitle">Work Experience</span>
-                </div>
-                <div class="card-content">
-                    <!-- Experience 1 -->
-                    <div class="experience-item">
-                        <div class="experience-header">
-                            <div class="experience-title-group">
-                                <h3>河南大学量化金融实验室</h3>
-                                <span class="experience-role">策略产品负责人 (Strategy Owner)</span>
-                            </div>
-                            <span class="experience-period">2024.04 – 2025.09</span>
-                        </div>
-                        <ul class="experience-list">
-                            <li>
-                                <span class="list-icon">→</span>
-                                <div class="list-content">
-                                    <strong>自动化系统设计：</strong> 针对日均 <strong class="highlight">10 万级</strong>高频金融数据，主导设计了一套自动化异常信号监测系统。定义了 12 个核心风险因子逻辑，利用 AI 辅助搭建自动化 ETL 管道，将原始数据处理效率提升 <strong class="highlight">500%</strong>。
-                                </div>
-                            </li>
-                            <li>
-                                <span class="list-icon">→</span>
-                                <div class="list-content">
-                                    <strong>策略风控迭代：</strong> 负责交易系统的风控策略设计。在 2024 年极端行情下，通过动态仓位管理模型，将系统最大回撤控制在 <strong class="highlight">5%</strong> 以内，验证了策略在极端环境下的鲁棒性。
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <!-- Experience 2 -->
-                    <div class="experience-item">
-                        <div class="experience-header">
-                            <div class="experience-title-group">
-                                <h3>维音信息技术 (Visionet)</h3>
-                                <span class="experience-role">用户运营专员 (策略方向)</span>
-                            </div>
-                            <span class="experience-period">2023.03 – 2024.03</span>
-                        </div>
-                        <ul class="experience-list">
-                            <li>
-                                <span class="list-icon">→</span>
-                                <div class="list-content">
-                                    <strong>营收增长策略 (Upsell)：</strong> 负责酒店业务板块的存量用户价值挖掘。基于用户历史订单与行为标签（RFM模型），制定差异化的升单策略。通过优化触达话术与推荐逻辑，实现单客 <strong class="highlight">ARPU（每用户平均收入）提升 15%</strong>。
-                                </div>
-                            </li>
-                            <li>
-                                <span class="list-icon">→</span>
-                                <div class="list-content">
-                                    <strong>履约体验保障 (SLA)：</strong> 监控供应商履约质量，建立风险预警机制。通过数据归因定位服务断点，协调资源进行整改，将核心业务的履约纠纷率降低 <strong class="highlight">10%</strong>。
-                                </div>
-                            </li>
-                            <li>
-                                <span class="list-icon">→</span>
-                                <div class="list-content">
-                                    <strong>数据产品化：</strong> 利用 Excel 搭建每日运营监控看板，涵盖流量、转化、客诉等核心维度，实现了业务指标的 T+0 可视化管理。
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 项目经历 - Full Width -->
-            <div class="card card-full scroll-reveal">
-                <div class="card-header">
-                    <h2>项目经历</h2>
-                    <span class="card-subtitle">Key Projects</span>
-                </div>
-                <div class="card-content">
-                    <!-- Project 1 -->
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div class="project-title-group">
-                                <h3>跨境金融业务 · 反欺诈策略产品化</h3>
-                                <span class="project-role">项目负责人</span>
-                            </div>
-                            <span class="project-period">2023.03 – 2023.06</span>
-                        </div>
-                        <ul class="project-list">
-                            <li>
-                                <span class="list-icon">→</span>
-                                <div class="list-content">
-                                    <strong>问题定义：</strong> 针对营销活动中 30% 的预算损耗问题，通过数据挖掘定位到黑产"薅羊毛"团伙的攻击路径。
-                                </div>
-                            </li>
-                            <li>
-                                <span class="list-icon">→</span>
-                                <div class="list-content">
-                                    <strong>策略落地：</strong> 独立定义了"设备指纹聚集度"等 5 个高风险特征维度，并设计了分层拦截产品方案（高风险熔断，中风险验证）。
-                                </div>
-                            </li>
-                            <li>
-                                <span class="list-icon">→</span>
-                                <div class="list-content">
-                                    <strong>项目成果：</strong> 方案上线后，成功拦截 80% 以上的异常账户，为业务挽回约 <strong class="highlight">30% 的营销预算</strong>。
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <!-- Project 2 -->
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div class="project-title-group">
-                                <h3>电商经营分析 · 自动化数据产品化</h3>
-                                <span class="project-role">数据产品经理</span>
-                            </div>
-                            <span class="project-period">2024.02 – 2024.05</span>
-                        </div>
-                        <ul class="project-list">
-                            <li>
-                                <span class="list-icon">→</span>
-                                <div class="list-content">
-                                    <strong>需求拆解：</strong> 深度调研业务痛点，梳理并定义了 GMV、复购率、转化漏斗等 20+ 个核心经营指标的底层计算口径。
-                                </div>
-                            </li>
-                            <li>
-                                <span class="list-icon">→</span>
-                                <div class="list-content">
-                                    <strong>工具提效：</strong> 利用 AI 代码生成技术快速搭建自动化监控看板，实现了数据从"被动提取"到"主动推送"的转变，降低了运营团队 <strong class="highlight">90% 的重复性统计工作</strong>。
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 教育背景 -->
-            <div class="card scroll-reveal">
-                <div class="card-header">
-                    <h2>教育背景</h2>
-                    <span class="card-subtitle">Education</span>
-                </div>
-                <div class="card-content">
-                    <div class="education-item">
-                        <div class="education-icon">🎓</div>
-                        <div class="education-info">
-                            <h4>电子科技大学</h4>
-                            <p class="education-degree">工商管理 (数据策略方向)</p>
-                            <p class="education-level">硕士研究生</p>
-                            <p class="education-period">2025.09 - 2027.06</p>
-                        </div>
-                    </div>
-                    <div class="divider-light"></div>
-                    <div class="education-item">
-                        <div class="education-icon">📚</div>
-                        <div class="education-info">
-                            <h4>河南大学</h4>
-                            <p class="education-degree">金融数学与金融工程</p>
-                            <p class="education-level">本科</p>
-                            <p class="education-period">2018.09 - 2022.06</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 技能与特质 -->
-            <div class="card scroll-reveal">
-                <div class="card-header">
-                    <h2>技能与特质</h2>
-                    <span class="card-subtitle">Skills & Expertise</span>
-                </div>
-                <div class="card-content">
-                    <div class="skills-section">
-                        <div class="skill-category">
-                            <span class="skill-label">产品/运营</span>
-                            <div class="skill-tags">
-                                <span class="skill-tag">需求分析</span>
-                                <span class="skill-tag">PRD 撰写</span>
-                                <span class="skill-tag">A/B Test</span>
-                                <span class="skill-tag">用户路径分析</span>
-                                <span class="skill-tag">SOP 制定</span>
-                                <span class="skill-tag">风险策略</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <span class="skill-label">数据与 AI</span>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Prompt Engineering</span>
-                                <span class="skill-tag">LLM 工具链</span>
-                                <span class="skill-tag">数据逻辑架构</span>
-                                <span class="skill-tag">AI 编程助手</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <span class="skill-label">工具栈</span>
-                            <div class="skill-tags">
-                                <span class="skill-tag">SQL</span>
-                                <span class="skill-tag">Python</span>
-                                <span class="skill-tag">Excel</span>
-                                <span class="skill-tag">Tableau</span>
-                                <span class="skill-tag">Visio</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <span class="skill-label">语言</span>
-                            <div class="skill-tags">
-                                <span class="skill-tag">英语 CET-6</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </main>
 
         <!-- Footer -->
         <footer class="footer">
