@@ -1,0 +1,322 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", "SimHei", "Source Han Sans CN", "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 页面顶部样式 */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.name {
+    font-family: "Microsoft YaHei", "SimHei", sans-serif;
+    font-size: 20pt;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.contact-info {
+    font-size: 10.5pt;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.8;
+}
+
+.contact-info a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+.job-intent {
+    font-size: 10.5pt;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* 章节样式 */
+.section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+}
+
+.section:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.section-title {
+    font-family: "Microsoft YaHei", "SimHei", sans-serif;
+    font-size: 14pt;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #3498db;
+    display: inline-block;
+    width: 100%;
+}
+
+/* 职业总结样式 */
+.summary-content p {
+    margin-bottom: 12px;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+.summary-content strong {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* 工作经历样式 */
+.experience-item {
+    margin-bottom: 25px;
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.company {
+    font-family: "Microsoft YaHei", "SimHei", sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.position {
+    font-size: 10.5pt;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.experience-period {
+    font-size: 10pt;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.experience-details {
+    list-style: none;
+    padding-left: 0;
+}
+
+.experience-details li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+.experience-details li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.experience-details strong {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* 项目经历样式 */
+.project-item {
+    margin-bottom: 25px;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.project-name {
+    font-family: "Microsoft YaHei", "SimHei", sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.project-role {
+    font-size: 10.5pt;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.project-period {
+    font-size: 10pt;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.project-details {
+    list-style: none;
+    padding-left: 0;
+}
+
+.project-details li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+.project-details li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.project-details strong {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* 教育背景样式 */
+.education-item {
+    margin-bottom: 20px;
+}
+
+.education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.school {
+    font-family: "Microsoft YaHei", "SimHei", sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.degree {
+    font-size: 10.5pt;
+    color: #7f8c8d;
+}
+
+.education-period {
+    font-size: 10pt;
+    color: #7f8c8d;
+}
+
+/* 技能样式 */
+.skills-content p {
+    margin-bottom: 10px;
+    line-height: 1.8;
+}
+
+.skills-content strong {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* 响应式设计 */
+@media print {
+    body {
+        background-color: #fff;
+        padding: 0;
+    }
+    
+    .container {
+        box-shadow: none;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    .name {
+        font-size: 18pt;
+    }
+    
+    .section-title {
+        font-size: 13pt;
+    }
+    
+    .experience-header,
+    .project-header,
+    .education-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .position,
+    .project-role,
+    .degree {
+        margin-top: 5px;
+    }
+    
+    .contact-info {
+        font-size: 9.5pt;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .name {
+        font-size: 16pt;
+    }
+    
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .contact-info span:not(:last-child)::after {
+        content: "";
+    }
+}
+
